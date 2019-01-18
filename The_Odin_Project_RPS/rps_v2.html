@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock, Paper, Scissors!</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      let playerScore = 0;
+      let compScore = 0;
+
+      function welcomeMessage () {
+        alert("Welcome to Rock, Paper, Scissors! Prepare for battle!");
+      }
+
+      function game(numOfRounds) {
+        welcomeMessage();
+        do {
+          var player = playerSelection();
+          let computerSelection = computerPlay()
+          var result = playRound(player, computerSelection);
+
+          if(result !== 0) {
+            numOfRounds--;
+          }
+        } while(numOfRounds > 0);
+
+        if(playerScore > compScore) {
+          alert( "You have " + playerScore + " points versus the computer\'s " + compScore + ". You win!" );
+        } else if (compScore > playerScore) {
+          alert( "The computer has " + compScore + " points versus your " + playerScore + ". You lose!" );
+        } else {
+          alert( "The computer has " + compScore + " points versus your " + playerScore + ". It's a tie!" );
+        }
+
+        clearScores();
+      }
+
+      function computerPlay() {
+        return compShoot[Math.floor(Math.random()*compShoot.length)]
+      }
+      let compShoot = ["rock", "paper", "scissors"];
+
+    function playerSelection() {
+      let playerSelection = prompt("Rock, Paper, Scissors...Shoot!").toLowerCase();
+      return playerSelection
+    }
+      function playRound(playerSelection, computerSelection) {
+        // Player chooses Rock.
+        if (playerSelection == "rock" && computerSelection == "rock") {
+            alert( "Rock vs. Rock. It's a wash!" );
+        } else if (playerSelection == "rock" && computerSelection == "paper") {
+            alert( "Rock vs. Paper. Paper covers Rocks. You lose!" );
+            compScore++;
+        } else if (playerSelection == "rock" && computerSelection == "scissors") {
+            alert( "Rock vs. Scissors. Rock crushes Scissors. You win!" );
+            playerScore++;
+
+        // Player chooses Paper.
+        } else if (playerSelection == "paper" && computerSelection == "rock") {
+            alert( "Paper vs. Rock. Paper covers Rocks. You win!" );
+            playerScore++;
+        } else if (playerSelection == "paper" && computerSelection == "paper") {
+            alert( "Paper vs. Paper. It's a wash!" );
+        } else if (playerSelection == "paper" && computerSelection == "scissors") {
+            alert( "Paper vs. Scissors. Scissors cuts Paper. You lose!" );
+            compScore++;
+
+        // Player chooses Scissors.
+        } else if (playerSelection == "scissors" && computerSelection == "rock") {
+            alert( "Scissors vs. Rock. Rock crushes Scissors. You lose!" );
+            compScore++;
+        } else if (playerSelection == "scissors" && computerSelection == "paper") {
+            alert( "Scissors vs. Paper. Scissors cuts Paper. You win!" );
+            playerScore++;
+        } else if (playerSelection == "scissors" && computerSelection == "scissors") {
+            alert( "Scissors vs. Scissors. It's a wash!" );
+
+        // Player inputs nothing.
+        } else {
+            alert( "You must enter either 'rock', 'paper' or 'scissors' to play.");
+
+        }
+}
+
+function clearScores() {
+  playerScore = 0;
+  compScore = 0;
+}
+
+game(5);
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Rock, Paper, Scissors!</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      function computerPlay(compShoot) {
+        return compShoot[Math.floor(Math.random()*compShoot.length)]
+      }
+      let compShoot = ["rock", "paper", "scissors"];
+
+      let playerPlay = prompt("Rock, Paper, Scissors...Shoot!");
+        let result;
+
+        // Player chooses Rock.
+        if (playerPlay.toLowerCase() == "rock" && compShoot == "rock") {
+          result = function() {
+            alert( "Rock vs. Rock. It's a wash!" );
+          };
+
+        } else if (playerPlay.toLowerCase() == "rock" && compShoot == "paper") {
+            result = function() {
+              alert( "Rock vs. Paper. Paper covers Rocks. You lose!" );
+          };
+
+        } else if (playerPlay.toLowerCase() == "rock" && compShoot == "scissors") {
+          result = function() {
+            alert( "Rock vs. Scissors. Rock crushes Scissors. You win!" );
+          };
+
+        } // Player chooses Paper.
+          else if (playerPlay.toLowerCase() == "paper" && compShoot == "rock") {
+          result = function() {
+            alert( "Paper vs. Rock. Paper covers Rocks. You win!" );
+          };
+
+        } else if (playerPlay.toLowerCase() == "paper" && compShoot == "paper") {
+        result = function() {
+          alert( "Paper vs. Paper. It's a wash!" );
+        };
+
+      } else if (playerPlay.toLowerCase() == "rock" && compShoot == "scissors") {
+          result = function() {
+            alert( "Paper vs. Scissors. Scissors cut Paper. You lose!" );
+          };
+        }
+        // Player chooses Scissors.
+        else if (playerPlay.toLowerCase() == "scissors" && compShoot == "rock") {
+        result = function() {
+          alert( "Scissors vs. Rock. Rock crushes Scissors. You lose!" );
+        };
+        }
+        else if (playerPlay.toLowerCase() == "scissors" && compShoot == "paper") {
+          result = function() {
+          alert( "Scissors vs. Paper. Scissors cut Paper. You win!" );
+        };
+        }
+        else if (playerPlay.toLowerCase() == "scissors" && compShoot == "scissors") {
+          result = function() {
+          alert( "Scissors vs. Scissors. It's a wash!" );
+        };
+
+
+        // Player does nothing.
+      } else {
+          alert( "You must enter either 'rock', 'paper' or 'scissors' to play.");
+        }
+
+
+
+    </script>
+  </body>
+</html>

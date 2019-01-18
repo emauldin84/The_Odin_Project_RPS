@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock, Paper, Scissors!</title>
+  </head>
+  <body>
+    <header>Welcome to Rock, Paper, Scissors! Prepare for Battle!</header>
+    <p>Begin by selecting your first move below. Games are best out of Five. Good luck!</p>
+    <div id="container">
+      <div>
+        <button type="button" name="button" id="rock" class="rpsChoice">Rock</button>
+      </div>
+      <div>
+        <button type="button" name="button" id="paper" class="rpsChoice">Paper</button>
+      </div>
+      <div>
+        <button type="button" name="button" id="scissors" class="rpsChoice">Scissors</button>
+      </div>
+    </div>
+
+    <div id="roundResult"></div>
+
+    <div id="runningScore"></div>
+
+    <div id="gameResult"></div>
+
+    <div>
+      <button type="button" name="button" id="newGame">New Game</button>
+    </div>
+
+
+
+    <script type="text/javascript">
+      let playerScore = 0;
+      let compScore = 0;
+
+      const runningScore = document.querySelector("#runningScore");
+      const paraRunningScore = document.createElement("p");
+      runningScore.appendChild(paraRunningScore);
+      paraRunningScore.textContent = '';
+
+      const roundResult = document.querySelector("#roundResult");
+      const paraRound = document.createElement("p");
+      roundResult.appendChild(paraRound);
+      paraRound.textContent = '';
+
+      const gameResult = document.querySelector("#gameResult");
+      const paraGame = document.createElement('p');
+      gameResult.appendChild(paraGame);
+      paraGame.textContent = '';
+
+      function game(clickedButton) {
+          //var player = playerSelection();
+          let playerSelection = clickedButton.id;
+          let computerSelection = computerPlay()
+          playRound(playerSelection, computerSelection);
+
+          if (playerScore >= 3 || compScore >= 3) {
+            displayResult(playerScore, compScore);
+
+          }
+        }
+      function computerPlay() {
+        let compShoot = ["rock", "paper", "scissors"];
+        return compShoot[Math.floor(Math.random()*compShoot.length)]
+      }
+
+      function displayResult(playerScore, compScore) {
+        if (playerScore > compScore) {
+          paraGame.textContent = `You have ${playerScore} points versus the computer\'s ${compScore}. You win!`;
+        } else if (compScore > playerScore) {
+          paraGame.textContent = `The computer has ${compScore} points versus your ${playerScore}. You lose!`;
+        } else {
+          paraGame.textContent =  `The computer has ${compScore} points versus your ${playerScore}. It's a tie!`;
+        }
+
+      }
+
+      function playRound(playerSelection, computerSelection) {
+
+        if (playerSelection === computerSelection) {
+          paraRound.textContent = `${playerSelection} vs. ${computerSelection}. It's a wash!`;
+        } else if (
+          (playerSelection === 'rock' && computerSelection === 'scissors') ||
+          (playerSelection === 'paper' && computerSelection === 'rock') ||
+          (playerSelection === 'scissors' && computerSelection === 'paper')) {
+            playerScore++;
+            paraRound.textContent = `${playerSelection} beats ${computerSelection}. You win this round!`;
+        } else if (
+          (playerSelection === 'rock' && computerSelection === 'paper') ||
+          (playerSelection === 'paper' && computerSelection === 'scissors') ||
+          (playerSelection === 'scissors' && computerSelection === 'rock')) {
+            compScore++;
+            paraRound.textContent = `${computerSelection} beats ${playerSelection}. You lose this round!`;
+      }
+
+      paraRunningScore.textContent = `Your Score: ${playerScore} \n Computer Score: ${compScore}`;
+
+      function clearScores() {
+        playerScore = 0;
+        compScore = 0;
+        paraRound.textContent = '';
+        paraGame.textContent = '';
+        paraRunningScore.textContent = '';
+      }
+      newGame.onclick = clearScores;
+}
+
+const allButtons = document.querySelectorAll('.rpsChoice');
+allButtons.forEach(rpsChoice => rpsChoice.addEventListener('click',function() {
+  game(rpsChoice)
+}));
+
+
+
+
+    </script>
+  </body>
+</html>
